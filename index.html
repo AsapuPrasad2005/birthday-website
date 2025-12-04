@@ -3,108 +3,310 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Happy Birthday My Love</title>
+    <title>Happy Birthday My Love Pappa</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+
     <style>
+
+        /* ===== BACKGROUND ANIMATION ===== */
         body {
             margin: 0;
             padding: 0;
-            font-family: 'Poppins', sans-serif;
+            font-family: "Poppins", sans-serif;
             background: linear-gradient(135deg, #ff9a9e, #fad0c4);
             overflow-x: hidden;
+            animation: bgPulse 6s ease-in-out infinite alternate;
         }
 
-        h1, h2, p { text-align: center; color: white; }
-
-        .heart {
-            position: fixed;
-            bottom: -10px;
-            color: #ffdde1;
-            font-size: 20px;
-            animation: floatUp 6s linear infinite;
-            opacity: 0.7;
+        @keyframes bgPulse {
+            from { filter: brightness(1); }
+            to { filter: brightness(1.14); }
         }
 
-        @keyframes floatUp {
-            0% { transform: translateY(0) scale(1); opacity: 0.7; }
-            100% { transform: translateY(-120vh) scale(1.5); opacity: 0; }
-        }
-
-        .title {
-            font-size: 3rem;
-            font-weight: bold;
-            animation: glow 2s ease-in-out infinite alternate;
-            margin-top: 80px;
+        /* ===== HEADING ===== */
+        h1 {
+            text-align: center;
+            margin-top: 60px;
+            font-size: 3.2rem;
+            color: white;
+            animation: glow 2s infinite alternate;
         }
 
         @keyframes glow {
-            from { text-shadow: 0 0 10px #fff, 0 0 20px #ff6b81; }
-            to { text-shadow: 0 0 20px #fff, 0 0 30px #ff9a9e; }
+            from { text-shadow: 0 0 20px #fff; }
+            to { text-shadow: 0 0 40px #ff6b81; }
         }
 
-        .card {
-            width: 80%; max-width: 500px; margin: 30px auto;
-            background: rgba(255, 255, 255, 0.2);
-            padding: 20px; border-radius: 20px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-            animation: fadeIn 2s ease;
+        /* ===== FLOATING HEARTS ===== */
+        .heart {
+            position: fixed;
+            bottom: -10px;
+            font-size: 20px;
+            color: #ffdde1;
+            animation: floatUp 6s linear infinite;
+            opacity: 0.7;
+            pointer-events: none;
         }
 
-        @keyframes fadeIn {
-            0% { opacity: 0; transform: translateY(20px); }
-            100% { opacity: 1; transform: translateY(0); }
+        @keyframes floatUp {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            100% { transform: translateY(-120vh) scale(1.6); opacity: 0; }
         }
 
+        /* ===== FLOATING PETALS ===== */
+        .petal {
+            position: fixed;
+            top: -10px;
+            width: 18px;
+            height: 18px;
+            background: pink;
+            border-radius: 50%;
+            opacity: 0.8;
+            animation: fall 5s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(120vh) rotate(160deg); opacity: 0; }
+        }
+
+        /* ===== BUTTON ===== */
         .btn {
-            display: block; margin: 25px auto;
-            padding: 15px 25px; font-size: 1.1rem;
-            color: white; background: #ff6b81;
-            border-radius: 30px;
-            text-decoration: none; transition: 0.3s;
+            display: block;
+            width: fit-content;
+            margin: 40px auto;
+            padding: 15px 40px;
+            background: #ff477e;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            box-shadow: 0 0 20px #ff6b81;
+            transition: 0.3s;
             cursor: pointer;
         }
 
-        .btn:hover { background: #ff4757; transform: scale(1.1); }
+        .btn:hover {
+            transform: scale(1.15);
+            background: #ff1e62;
+            box-shadow: 0 0 30px #ff1e62;
+        }
+
+        /* ===== CARD CONTAINER ===== */
+        #cardContainer {
+            display: none;
+            width: 330px;
+            height: 480px;
+            margin: 30px auto;
+            perspective: 1400px;
+            animation: fadeIn 1.3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .birthdayCard {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 1.5s;
+        }
+
+        .birthdayCard.open {
+            transform: rotateY(180deg);
+        }
+
+        /* ===== FRONT OF CARD ===== */
+        .front, .inside {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .front {
+            background: linear-gradient(145deg, #ff6b81, #ff1e62);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: "Great Vibes", cursive;
+            font-size: 2.6rem;
+            color: white;
+            text-shadow: 0 0 15px white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* ===== INSIDE OF CARD ===== */
+        .inside {
+            background: white;
+            transform: rotateY(180deg);
+            padding: 20px 15px;
+            text-align: center;
+            overflow-y: auto;      /* FIX: card content stays inside */
+            scrollbar-width: thin;
+        }
+
+        .inside h2 {
+            color: #ff1e62;
+            font-size: 1.9rem;
+            margin-top: 10px;
+            font-weight: 600;
+        }
+
+        .inside p {
+            font-size: 1.05rem;   /* FIX: slightly reduced for perfect fit */
+            line-height: 1.45;    /* FIX: better spacing */
+            color: #444;
+            padding: 0 10px;
+        }
+
+        /* ===== FIREWORKS CANVAS ===== */
+        #fireworksCanvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            display: none;
+        }
     </style>
 </head>
 <body>
 
-    <h1 class="title">Happy Birthday My Love ❤️</h1>
+    <h1>Happy Birthday My Love Pappa ❤️</h1>
 
-    <div class="card">
-        <h2>To My Most Special Girl</h2>
-        <p>You are the reason my world is beautiful. On your birthday, I wish you endless happiness and love. 💖</p>
+    <div class="btn" onclick="startSurprise()">Click Here for Your Surprise 🎁</div>
+
+    <!-- 3D CARD -->
+    <div id="cardContainer">
+        <div class="birthdayCard" id="birthdayCard">
+            <div class="front">Happy Birthday Pappa ❤️</div>
+
+            <div class="inside">
+                <h2>To My Beautiful Pappa</h2>
+                <p>
+                    You are the softest part of my heart,  
+                    the most precious piece of my soul,  
+                    and the reason my life feels magical.<br><br>
+
+                    Every moment with you feels like a blessing,  
+                    every smile of yours feels like sunrise,  
+                    and every birthday of yours  
+                    is the most special day of my life.<br><br>
+
+                    I love you endlessly,  
+                    deeply,  
+                    and forever. 💖
+                </p>
+            </div>
+        </div>
     </div>
 
-    <div class="card">
-        <h2>🎉 Birthday Wishes 🎉</h2>
-        <p>May your smile shine brighter than the sun today. May your dreams come true today and always.</p>
-    </div>
+    <canvas id="fireworksCanvas"></canvas>
 
-    <!-- WORKING MUSIC (PLAYS AFTER CLICK) -->
-    <button onclick="startMusic()" class="btn">Click to Play Music 🎶</button>
-
-    <audio id="bg-music" preload="auto" loop>
-        <source src="https://dl.sndup.net/6x6p/PerfectEdSheeran.mp3" type="audio/mpeg">
-    </audio>
+    <!-- Autoplay Music -->
+    <iframe
+        style="display:none;"
+        width="0" height="0"
+        src="https://www.youtube.com/embed/2Vv-BfVoq4g?autoplay=1&loop=1&playlist=2Vv-BfVoq4g">
+    </iframe>
 
     <script>
-        function startMusic() {
-            const audio = document.getElementById("bg-music");
-            audio.volume = 1.0;
-            audio.play().catch(e => console.log(e));
-        }
 
-        function createHeart() {
+        /* Floating Hearts */
+        setInterval(() => {
             const heart = document.createElement("div");
             heart.classList.add("heart");
             heart.innerHTML = "❤️";
             heart.style.left = Math.random() * window.innerWidth + "px";
-            heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+            heart.style.fontSize = (Math.random() * 20 + 18) + "px";
             document.body.appendChild(heart);
-            setTimeout(() => heart.remove(), 6000);
+            setTimeout(() => heart.remove(), 7000);
+        }, 300);
+
+        /* Floating Petals */
+        setInterval(() => {
+            const p = document.createElement("div");
+            p.classList.add("petal");
+            p.style.left = Math.random() * window.innerWidth + "px";
+            p.style.background = ["#ffb6c1", "#ffc1cc", "#ff8fa3"][Math.floor(Math.random()*3)];
+            document.body.appendChild(p);
+            setTimeout(() => p.remove(), 6000);
+        }, 450);
+
+        /* Fireworks */
+        function startFireworks() {
+            const canvas = document.getElementById("fireworksCanvas");
+            const ctx = canvas.getContext("2d");
+            canvas.style.display = "block";
+
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            let particles = [];
+
+            function firework() {
+                const x = Math.random() * canvas.width;
+                const y = canvas.height;
+
+                const colors = ["#ff477e", "#ff9a9e", "#ffd1dc", "#ffffff", "#ff4d6d"];
+
+                for (let i = 0; i < 45; i++) {
+                    particles.push({
+                        x,
+                        y,
+                        color: colors[Math.floor(Math.random() * colors.length)],
+                        angle: Math.random() * Math.PI * 2,
+                        speed: Math.random() * 5 + 2,
+                        size: Math.random() * 3 + 2,
+                        life: 60
+                    });
+                }
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                particles.forEach((p, i) => {
+                    p.x += Math.cos(p.angle) * p.speed;
+                    p.y += Math.sin(p.angle) * p.speed;
+                    p.life--;
+
+                    ctx.fillStyle = p.color;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    if (p.life <= 0) particles.splice(i, 1);
+                });
+
+                requestAnimationFrame(animate);
+            }
+
+            firework();
+            setInterval(firework, 900);
+            animate();
         }
-        setInterval(createHeart, 300);
+
+        /* Main Surprise */
+        function startSurprise() {
+            startFireworks();
+            document.getElementById("cardContainer").style.display = "block";
+
+            setTimeout(() => {
+                document.getElementById("birthdayCard").classList.add("open");
+            }, 500);
+        }
+
     </script>
 
 </body>
