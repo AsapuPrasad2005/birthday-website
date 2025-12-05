@@ -150,9 +150,9 @@
         .inside {
             background: white;
             transform: rotateY(180deg);
-            padding: 20px 15px;
+            padding: 22px 14px;
             text-align: center;
-            overflow-y: auto;      /* FIX: card content stays inside */
+            overflow-y: auto;
             scrollbar-width: thin;
         }
 
@@ -164,10 +164,11 @@
         }
 
         .inside p {
-            font-size: 1.05rem;   /* FIX: slightly reduced for perfect fit */
-            line-height: 1.45;    /* FIX: better spacing */
+            font-size: 1rem;
+            line-height: 1.45;
             color: #444;
-            padding: 0 10px;
+            padding: 0 5px;
+            white-space: pre-line;
         }
 
         /* ===== FIREWORKS CANVAS ===== */
@@ -193,19 +194,29 @@
 
             <div class="inside">
                 <h2>To My Beautiful Papa</h2>
+
                 <p>
-                    You are the softest part of my heart,  
-                    the most precious piece of my soul,  
-                    and the reason my life feels magical.<br><br>
+You are the softest part of my heart,
+the most precious piece of my soul,
+and the reason my world feels magical.
 
-                    Every moment with you feels like a blessing,  
-                    every smile of yours feels like sunrise,  
-                    and every birthday of yours  
-                    is the most special day of my life.<br><br>
+Every moment with you feels like a blessing,
+every smile of yours feels like sunrise,
+and every birthday of yours is a day
+the universe becomes more beautiful.
 
-                    I love you endlessly,  
-                    deeply,  
-                    and forever. 💖
+You are the warmth in my cold days,
+the calm in my storms,
+the dream I never want to wake up from.
+
+Thank you for making my life brighter,
+happier, sweeter,
+and filled with love I never imagined I could feel.
+
+I love you endlessly…
+deeply…
+truly…
+and forever. 💖
                 </p>
             </div>
         </div>
@@ -213,12 +224,8 @@
 
     <canvas id="fireworksCanvas"></canvas>
 
-    <!-- Autoplay Music -->
-    <iframe
-        style="display:none;"
-        width="0" height="0"
-        src="https://www.youtube.com/embed/2Vv-BfVoq4g?autoplay=1&loop=1&playlist=2Vv-BfVoq4g">
-    </iframe>
+    <!-- WORKING BACKGROUND MUSIC -->
+    <audio id="bgMusic" src="music.mp3" preload="auto"></audio>
 
     <script>
 
@@ -299,16 +306,24 @@
 
         /* Main Surprise */
         function startSurprise() {
+
+            // Start Fireworks
             startFireworks();
+
+            // Show 3D card
             document.getElementById("cardContainer").style.display = "block";
 
             setTimeout(() => {
                 document.getElementById("birthdayCard").classList.add("open");
             }, 500);
+
+            // Play background music
+            const music = document.getElementById("bgMusic");
+            music.volume = 1.0;
+            music.play().catch(() => {});
         }
 
     </script>
 
 </body>
 </html>
-
